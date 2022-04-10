@@ -4,18 +4,27 @@ import React from 'react';
 import { getAuth } from 'firebase/auth';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import app from '../../firebase.init'
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const auth = getAuth(app);
 const Login = () => {
+  // const [user] = useAuthState(auth);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
     // const {signInWithGoogle} = useFirebase({});
-    const [signInWithGoogle, user] = useSignInWithGoogle(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
     const handleSignInWithGoogle = (e) =>{
       e.preventDefault();
-      signInWithGoogle();
-
+      signInWithGoogle()
+      .then(() =>{
+        navigate(from, { replace: true });
+      })
+      
     }
-
-    console.log(user.user.displayName)
     return (
         <div>
       <h3 className="text-center mb-5 mt-3">Please Login</h3>

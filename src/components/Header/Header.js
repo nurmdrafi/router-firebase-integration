@@ -14,7 +14,6 @@ const Header = () => {
     const handleSignOut = () =>{
         signOut(auth);
     }
-
     return (
         <div className='container-fluid d-flex justify-content-center align-items-center my-2' style={{height: '80px'}}>
             <Link to="/" className='text-decoration-none m-3 fw-bold text-black'>Home</Link>
